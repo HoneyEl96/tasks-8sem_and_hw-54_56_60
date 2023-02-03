@@ -5,9 +5,9 @@
 
 // void FillArrayWithRandom(int[,] matrix)
 // {
-// for(int i = 0; i < matrix.GetLength(0); i++)
+// for(int i = 0; i < matrix.GetLength(0); i++) //GetLength(0) - отвечает за строки
 // {
-// for(int j = 0; j < matrix.GetLength(1); j++)
+// for(int j = 0; j < matrix.GetLength(1); j++) //GetLength(1) - отвечает за столбцы
 // {
 // matrix[i,j] = new Random().Next(0, 10);
 // }
@@ -39,9 +39,10 @@
 
 // for(int i = 0; i < matrix.GetLength(1); i++)
 // {
-// temp = matrix[0,i];
-// matrix[0, i] = matrix[matrix.GetLength(0) - 1, i];
-// matrix[matrix.GetLength(0) - 1, i] = temp;
+// temp = matrix[0,i]; // [0,i] - записали нулевую строку в темп
+// matrix[0, i] = matrix[matrix.GetLength(0) - 1, i]; // перезаписали нелувую строку в последнюю 
+// // 5 на 4 матрица, 5-1 = 4 -индекс последней строки
+// matrix[matrix.GetLength(0) - 1, i] = temp; // перезаписали последнюю строку в темп (поменяли первую и последнюю строку местами)
 // }
 // Console.WriteLine();
 // PrintArrayWithRandom(matrix);
@@ -209,8 +210,8 @@
 
 // Обязательные задачи:
 
-// Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
-// Например, задан массив:
+// Задача 54: Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой 
+// строки двумерного массива. Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
 // 8 4 2 4
@@ -219,14 +220,77 @@
 // 9 5 3 2
 // 8 4 4 2
 
-// Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+void FillMatrixRandom(int[,] matrix, int rows, int columns) 
+{
+for(int i = 0; i < rows; i++)
+{
+for(int j = 0; j < columns; j++)
+{
+matrix[i,j] = new Random().Next(0,10);
+Console.Write(matrix[i,j] + "\t"); 
+}
+Console.WriteLine();
+}
+}
+
+// метод пузырьков, через одномерный массив
+void SortMaxToMinWithBubble(int[] stroki) // метод пузырьков
+{
+for (int i = 0; i < stroki.Length; i++)
+for (int j = 0; j < stroki.Length - i - 1; j++)
+{
+if (stroki[j] < stroki[j + 1])
+{
+int temp = stroki[j];
+stroki[j] = stroki[j + 1];
+stroki[j + 1] = temp;    
+}
+}
+Console.WriteLine(string.Join(", ", stroki));
+}
+
+// не получился метод пузырьков через двумерный массив, как его правильно офрмить, чтоб все работало?
+// void SortMaxToMinWithBubble(int[,] matrix, int stroki, int stolbci)// метод пузырьков
+// {
+// for (int i = 0; i < matrix.GetLength(0); i++)
+// for (int j = 0; j < matrix.GetLength(0) - i - 1; j++)
+// for (int k=1; k < matrix.GetLength(1);k++)
+// {
+// if (matrix[j,i] < matrix[j + 1,i])
+// {
+// int temp = matrix[j,i];
+// matrix[j,i] = matrix[j + 1,i];
+// matrix[j + 1,i] = temp;    
+// }
+// }
+// Console.WriteLine(matrix);
+// }
+
+Console.WriteLine("Введите число строк:");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите число столбцов:");
+int columns = Convert.ToInt32(Console.ReadLine());
+int [,] matrix = new int[rows,columns];
+Console.WriteLine("Исходный сгенерированный массив:");
+FillMatrixRandom(matrix, rows, columns);
+// первая часть программы, с сгенерированным выводом массива
+
+Console.WriteLine("Сортировка по строкам: ");
+int[] row = new int[columns];
+for (int i = 0; i < rows; i++)
+{
+for (int j = 0; j < columns; j++)
+row[j] = matrix[i, j];
+SortMaxToMinWithBubble(row);
+}
+
+// Задача 56: Задайте двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 // Например, задан массив:
 // 1 4 7 2
 // 5 9 2 3
 // 8 4 2 4
 // 5 2 6 7
-
-// Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
+// Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: одна строка
 
 // Дополнительные(не обязательные)
 
@@ -237,7 +301,7 @@
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
-// Дополнительные задачи(необязательные):
+// Дополнительные задачи(не обязательные):
 
 // Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
 // Например, даны 2 матрицы:
