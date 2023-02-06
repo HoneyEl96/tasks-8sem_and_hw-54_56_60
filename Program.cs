@@ -220,34 +220,34 @@
 // 9 5 3 2
 // 8 4 4 2
 
-void FillMatrixRandom(int[,] matrix, int rows, int columns) 
-{
-for(int i = 0; i < rows; i++)
-{
-for(int j = 0; j < columns; j++)
-{
-matrix[i,j] = new Random().Next(0,10);
-Console.Write(matrix[i,j] + "\t"); 
-}
-Console.WriteLine();
-}
-}
+// void FillMatrixRandom(int[,] matrix, int rows, int columns) 
+// {
+// for(int i = 0; i < rows; i++)
+// {
+// for(int j = 0; j < columns; j++)
+// {
+// matrix[i,j] = new Random().Next(0,10);
+// Console.Write(matrix[i,j] + "\t"); 
+// }
+// Console.WriteLine();
+// }
+// }
 
-// // метод пузырьков, через одномерный массив
-void SortMaxToMinWithBubble(int[] stroki) // метод пузырьков
-{
-for (int i = 0; i < stroki.Length; i++)
-for (int j = 0; j < stroki.Length - i - 1; j++)
-{
-if (stroki[j] < stroki[j + 1])
-{
-int temp = stroki[j];
-stroki[j] = stroki[j + 1];
-stroki[j + 1] = temp;    
-}
-}
-Console.WriteLine(string.Join(", ", stroki));
-}
+// метод пузырьков, через одномерный массив
+// void SortMaxToMinWithBubble(int[] stroki) // метод пузырьков
+// {
+// for (int i = 0; i < stroki.Length; i++)
+// for (int j = 0; j < stroki.Length - i - 1; j++)
+// {
+// if (stroki[j] < stroki[j + 1])
+// {
+// int temp = stroki[j];
+// stroki[j] = stroki[j + 1];
+// stroki[j + 1] = temp;    
+// }
+// }
+// Console.WriteLine(string.Join(", ", stroki));
+// }
 
 // int[,] SortMaxToMinWithBubble(int [,] matrix) 
 // { 
@@ -269,24 +269,24 @@ Console.WriteLine(string.Join(", ", stroki));
 // return(matrix);
 // }
 
-Console.WriteLine("Введите число строк:");
-int rows = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите число столбцов:");
-int columns = Convert.ToInt32(Console.ReadLine());
-int [,] matrix = new int[rows,columns];
-Console.WriteLine("Исходный сгенерированный массив:");
-FillMatrixRandom(matrix, rows, columns);
-// первая часть программы, с сгенерированным выводом массива
+// Console.WriteLine("Введите число строк:");
+// int rows = Convert.ToInt32(Console.ReadLine());
+// Console.WriteLine("Введите число столбцов:");
+// int columns = Convert.ToInt32(Console.ReadLine());
+// int [,] matrix = new int[rows,columns];
+// Console.WriteLine("Исходный сгенерированный массив:");
+// FillMatrixRandom(matrix, rows, columns);
+// // первая часть программы, с сгенерированным выводом массива
 
-// для первого варианта
-Console.WriteLine("Сортировка по строкам: ");
-int[] row = new int[columns];
-for (int i = 0; i < rows; i++)
-{
-for (int j = 0; j < columns; j++)
-row[j] = matrix[i, j];
-SortMaxToMinWithBubble(row);
-}
+// // для первого варианта
+// Console.WriteLine("Сортировка по строкам: ");
+// int[] row = new int[columns];
+// for (int i = 0; i < rows; i++)
+// {
+// for (int j = 0; j < columns; j++)
+// row[j] = matrix[i, j];
+// SortMaxToMinWithBubble(row);
+// }
 
 // // для второго варианта
 // Console.WriteLine("Сортировка по строкам: ");
@@ -338,8 +338,7 @@ SortMaxToMinWithBubble(row);
 //     // назначить новый i-ый счетчик и начать его с первого индекса строки
 //     {
 //         int sum = 0;
-//         for (int j = 0; j < matrix.GetLength(1); j++)
-//         // запустив счетчик в счетчике проходим по столбцам 
+//         for (int j = 0; j < matrix.GetLength(1); j++) // запустив счетчик в счетчике проходим по столбцам 
 //         {
 //             sum += matrix[i, j];
 //         }
@@ -367,6 +366,121 @@ SortMaxToMinWithBubble(row);
 // 34(1,0,0) 41(1,1,0)
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
+
+// не знаю, как в дальнейшем воспользоваться(((
+// int[,,] FillRubixArrayRandom(int[,,] rubixArray) // заполнить рандомными числами трёхмерный массив
+// {
+//     for (int i = 0; i < rubixArray.GetLength(0); i++) // пройтись счетчиком по строкам
+//     {
+//         for (int j = 0; j < rubixArray.GetLength(1); j++) // пройтись счетчиком по столбцам
+//         {
+//             for (int k = 0; k < rubixArray.GetLength(2); k++) // пройтись счетчиком по объему
+//             {
+//             rubixArray[i,j,k] = new Random().Next(10,100); // сгенерировать рандомные двузначные числа
+//             Console.Write(rubixArray[i,j,k] + "\t"); 
+//             }
+//         Console.WriteLine();
+//         }
+//     }
+// return(rubixArray);
+// }
+
+// метод проверки на повторяющиеся числа, выдает только false и true
+bool NotRepetetiveNumber(int[] savedNumbers, int check)
+{
+    int count = 0; // счетчик для проверки на повторяемость
+    for (int i = 0; i < savedNumbers.Length; i++) // в одномерном массиве пройтись по строке
+    {
+        if(savedNumbers[i] == check)// если ввели число
+        {
+        count ++; // увеличить счетчик
+        }
+    }
+        if(count > 1) // если счетчик больше одного
+        {
+        return false; // вернуть значение false
+        }
+        else // иначе
+        {
+        return true; // вернуть значение true
+        }
+}
+
+// попробовал написать в метод, но так и не понял, как мне его вызывать, если у меня значения в цикле 
+// используются, а не в методе, проще говоря, нужно делать несколько методов и потом на них ссылаться??
+
+// int CheckNumbersByProof(savedNums, num)
+// {
+//     for (int m = 0; m < savedNums.Length; m++) // пройтись по длине одномерного массива
+//     {
+//         if (savedNums[m] != num && savedNums[m] == 0) // если НЕ равно num и равно 0
+//         {
+//         savedNums[m] = num; // присвоить 
+//         break; // прервать
+//         }
+//         return(savedNums, num);
+//     }
+// }
+
+Console.Write("Введите число строк: ");
+int x = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите число столбцов: ");
+int y = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите объем: ");
+int z = Convert.ToInt32(Console.ReadLine());
+int[,,] rubixArray = new int[x, y, z];
+int[] savedNums = new int[x*y*z];
+
+
+    for (int i = 0; i < rubixArray.GetLength(0); i++) // пройтись счетчиком по строкам
+    {
+        for (int j = 0; j < rubixArray.GetLength(1); j++) // пройтись счетчиком по столбцам
+        {
+            for (int k = 0; k < rubixArray.GetLength(2); k++) // пройтись счетчиком по объему
+            {
+            rubixArray[i, j, k] = new Random().Next(10, 100); // сгенерировать рандомные двузначные числа
+            int num = rubixArray[i, j, k];
+            // CheckNumbersByProof(savedNums, num);
+                for (int m = 0; m < savedNums.Length; m++) // пройтись по длине одномерного массива
+                {
+                    if (savedNums[m] != num && savedNums[m] == 0) // если НЕ равно num и равно 0
+                    {
+                    savedNums[m] = num; // присвоить 
+                    break; // прервать
+                    }
+                } 
+            bool proof = NotRepetetiveNumber(savedNums, num); // запустить проверку по savedNums, num
+            if (proof == false) // если proof - false
+            {
+                while (proof == false) // когда proof - false
+                {
+                    proof = true; // присвоить вместо false, новое true 
+                    rubixArray[i, j, k] = new Random().Next(10, 100); // сгенерировать новое двузн. число
+                    num = rubixArray[i, j, k];
+                    for (int n = 0; n < savedNums.Length; n++) // пройтись по длине одномерного массива
+                    {
+                        if (savedNums[n] != num && savedNums[n] == 0) // если НЕ равно num и равно 0
+                        {
+                        savedNums[n] = num; // присвоить 
+                        break; // прервать
+                        }
+                        else if (proof == true) // тогда если proof - true
+                        {
+                        NotRepetetiveNumber(savedNums, num); // воспользоваться методом
+                        }
+                        else // иначе
+                        {
+                        proof = false; // присвоить false
+                        break; // прервать
+                        }
+                    }
+                }
+            }
+                Console.Write(rubixArray[i, j, k] + $"({i}, {j}, {k}) ");
+                }
+        Console.WriteLine();
+        }
+    }
 
 // Дополнительные задачи(не обязательные):
 
