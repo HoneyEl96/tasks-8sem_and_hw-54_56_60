@@ -220,69 +220,69 @@
 // 9 5 3 2
 // 8 4 4 2
 
-void FillMatrixRandom(int[,] matrix, int rows, int columns) 
-{
-for(int i = 0; i < rows; i++)
-{
-for(int j = 0; j < columns; j++)
-{
-matrix[i,j] = new Random().Next(0,10);
-Console.Write(matrix[i,j] + "\t"); 
-}
-Console.WriteLine();
-}
-}
-
-// метод пузырьков, через одномерный массив
-void SortMaxToMinWithBubble(int[] stroki) // метод пузырьков
-{
-for (int i = 0; i < stroki.Length; i++)
-for (int j = 0; j < stroki.Length - i - 1; j++)
-{
-if (stroki[j] < stroki[j + 1])
-{
-int temp = stroki[j];
-stroki[j] = stroki[j + 1];
-stroki[j + 1] = temp;    
-}
-}
-Console.WriteLine(string.Join(", ", stroki));
-}
-
-// не получился метод пузырьков через двумерный массив, как его правильно офрмить, чтоб все работало?
-// void SortMaxToMinWithBubble(int[,] matrix, int stroki, int stolbci)// метод пузырьков
+// void FillMatrixRandom(int[,] matrix, int rows, int columns) 
 // {
-// for (int i = 0; i < matrix.GetLength(0); i++)
-// for (int j = 0; j < matrix.GetLength(0) - i - 1; j++)
-// for (int k=1; k < matrix.GetLength(1);k++)
+// for(int i = 0; i < rows; i++)
 // {
-// if (matrix[j,i] < matrix[j + 1,i])
+// for(int j = 0; j < columns; j++)
 // {
-// int temp = matrix[j,i];
-// matrix[j,i] = matrix[j + 1,i];
-// matrix[j + 1,i] = temp;    
+// matrix[i,j] = new Random().Next(0,10);
+// Console.Write(matrix[i,j] + "\t"); 
+// }
+// Console.WriteLine();
 // }
 // }
-// Console.WriteLine(matrix);
+
+// // метод пузырьков, через одномерный массив
+// void SortMaxToMinWithBubble(int[] stroki) // метод пузырьков
+// {
+// for (int i = 0; i < stroki.Length; i++)
+// for (int j = 0; j < stroki.Length - i - 1; j++)
+// {
+// if (stroki[j] < stroki[j + 1])
+// {
+// int temp = stroki[j];
+// stroki[j] = stroki[j + 1];
+// stroki[j + 1] = temp;    
+// }
+// }
+// Console.WriteLine(string.Join(", ", stroki));
 // }
 
-Console.WriteLine("Введите число строк:");
-int rows = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите число столбцов:");
-int columns = Convert.ToInt32(Console.ReadLine());
-int [,] matrix = new int[rows,columns];
-Console.WriteLine("Исходный сгенерированный массив:");
-FillMatrixRandom(matrix, rows, columns);
-// первая часть программы, с сгенерированным выводом массива
+// // не получился метод пузырьков через двумерный массив, как его правильно офрмить, чтоб все работало?
+// // void SortMaxToMinWithBubble(int[,] matrix, int stroki, int stolbci)// метод пузырьков
+// // {
+// // for (int i = 0; i < matrix.GetLength(0); i++)
+// // for (int j = 0; j < matrix.GetLength(0) - i - 1; j++)
+// // for (int k=1; k < matrix.GetLength(1);k++)
+// // {
+// // if (matrix[j,i] < matrix[j + 1,i])
+// // {
+// // int temp = matrix[j,i];
+// // matrix[j,i] = matrix[j + 1,i];
+// // matrix[j + 1,i] = temp;    
+// // }
+// // }
+// // Console.WriteLine(matrix);
+// // }
 
-Console.WriteLine("Сортировка по строкам: ");
-int[] row = new int[columns];
-for (int i = 0; i < rows; i++)
-{
-for (int j = 0; j < columns; j++)
-row[j] = matrix[i, j];
-SortMaxToMinWithBubble(row);
-}
+// Console.WriteLine("Введите число строк:");
+// int rows = Convert.ToInt32(Console.ReadLine());
+// Console.WriteLine("Введите число столбцов:");
+// int columns = Convert.ToInt32(Console.ReadLine());
+// int [,] matrix = new int[rows,columns];
+// Console.WriteLine("Исходный сгенерированный массив:");
+// FillMatrixRandom(matrix, rows, columns);
+// // первая часть программы, с сгенерированным выводом массива
+
+// Console.WriteLine("Сортировка по строкам: ");
+// int[] row = new int[columns];
+// for (int i = 0; i < rows; i++)
+// {
+// for (int j = 0; j < columns; j++)
+// row[j] = matrix[i, j];
+// SortMaxToMinWithBubble(row);
+// }
 
 // Задача 56: Задайте двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 // Например, задан массив:
@@ -292,9 +292,59 @@ SortMaxToMinWithBubble(row);
 // 5 2 6 7
 // Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: одна строка
 
-// Дополнительные(не обязательные)
+void FillMatrixRandom(int[,] matrix, int rows, int columns)
+{
+Console.WriteLine("Диапазон рандомных значений от 1 до..:");
+// Random().Next(range) вводится с клавиатуры, начиная с 1
+int range = Convert.ToInt32(Console.ReadLine());
+for (int i = 0; i < rows; i++)
+{
+for (int j = 0; j < columns; j++)
+{
+matrix[i, j] = new Random().Next(range + 1);
+Console.Write(matrix[i, j] + "\t");
+}
+Console.WriteLine();
+}
+}
 
-// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+void SumRowAndIndex(int[,] matrix)
+{
+    int ind = 0;
+    int minSum = 0;
+    for (int i = 0; i < matrix.GetLength(1); i++)
+    // пройти i-ым счетчиком по столбцам для минсуммы
+    {
+        minSum += matrix[0, i]; // сказать, что сумма 0 строки, это теперь минимальная сумма
+    }
+    for (int i = 1; i < matrix.GetLength(0); i++)
+    // назначить новый i-ый счетчик и начать его с первого индекса строки
+    {
+        int sum = 0;
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        // запустив счетчик в счетчике проходим по столбцам 
+        {
+            sum += matrix[i, j];
+        }
+        if (minSum > sum) // условие, где если полученная выше minsum больше sum, переназначить
+        {
+            minSum = sum;
+            ind = i; // напечатать номер строки
+        }
+    }
+    Console.WriteLine("Минимальная сумма: " + minSum + $", это {ind+1} строка");
+}
+
+Console.WriteLine("Введите число строк:");
+int rows = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите число столбцов:");
+int columns = Convert.ToInt32(Console.ReadLine());
+int[,] matrix = new int[rows, columns];
+FillMatrixRandom(matrix, rows, columns);
+SumRowAndIndex(matrix);
+
+// Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, 
+// которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
 // 66(0,0,0) 25(0,1,0)
 // 34(1,0,0) 41(1,1,0)
